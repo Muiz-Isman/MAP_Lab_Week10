@@ -1,0 +1,9 @@
+package com.example.map_lab_week10.database
+
+import androidx.room.Database
+import androidx.room.RoomDatabase
+
+@Database(entities = [Total::class], version = 1)
+abstract class TotalDatabase : RoomDatabase() {
+    abstract fun totalDao(): TotalDao
+}

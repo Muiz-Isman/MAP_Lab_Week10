@@ -1,10 +1,11 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("kotlin-kapt") // Cukup tambahkan ini saja
 }
 
 android {
-    namespace = "com.example.map_lab_week10"
+    namespace = "com.example.map_lab_week10" // Pastikan ini sesuai package kamu
     compileSdk = 36
 
     defaultConfig {
@@ -36,8 +37,17 @@ android {
 }
 
 dependencies {
+    // Room Dependencies (Sudah benar)
+    val roomVersion = "2.6.0"
+    implementation("androidx.room:room-runtime:$roomVersion")
+    kapt("androidx.room:room-compiler:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
+
+    // Lifecycle (Sudah benar)
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
+
+    // Default Dependencies
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
