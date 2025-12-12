@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MAP_Lab_Week10</string>
+    <string name="text_total">Total: %d</string>
+    <string name="button_increment">Press Me</string>
 </resources>
