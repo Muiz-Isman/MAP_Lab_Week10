@@ -5,11 +5,10 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.example.map_lab_week10.viewmodels.TotalViewModel
+import com.example.lab_week_10.viewmodels.TotalViewModel
 
 class MainActivity : AppCompatActivity() {
 
-    // Inisialisasi ViewModel secara Lazy
     private val viewModel by lazy {
         ViewModelProvider(this)[TotalViewModel::class.java]
     }
@@ -18,14 +17,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // 1. Ambil nilai terakhir dari ViewModel (agar saat rotate data tetap ada)
-        updateText(viewModel.total)
+        prepareViewModel()
+    }
 
-        // 2. Set listener tombol
+    private fun prepareViewModel() {
+        // 1. Observe: Jika data di ViewModel berubah, otomatis jalankan updateText
+        viewModel.total.observe(this) { total ->
+            updateText(total)
+        }
+
+        // 2. Tombol hanya tugasnya trigger fungsi di ViewModel.
+        // Tidak perlu updateText manual di sini.
         findViewById<Button>(R.id.button_increment).setOnClickListener {
-            // Panggil fungsi di ViewModel, lalu update UI dengan nilai balikan
-            val newTotal = viewModel.incrementTotal()
-            updateText(newTotal)
+            viewModel.incrementTotal()
         }
     }
 
